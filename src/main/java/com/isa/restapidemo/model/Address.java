@@ -14,7 +14,7 @@ public class Address {
     private Integer addressId;
 
     @Column(nullable = false)
-    private String provide;
+    private String province;
 
     @Column(nullable = false)
     private String city;
@@ -45,12 +45,12 @@ public class Address {
         this.addressId = addressId;
     }
 
-    public String getProvide() {
-        return provide;
+    public String getProvince() {
+        return province;
     }
 
-    public void setProvide(String provide) {
-        this.provide = provide;
+    public void setProvince(String province) {
+        this.province = province;
     }
 
     public String getCity() {
@@ -107,7 +107,7 @@ public class Address {
         if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
         return Objects.equals(addressId, address.addressId) &&
-                Objects.equals(provide, address.provide) &&
+                Objects.equals(province, address.province) &&
                 Objects.equals(city, address.city) &&
                 Objects.equals(postCode, address.postCode) &&
                 Objects.equals(street, address.street) &&
@@ -117,14 +117,14 @@ public class Address {
 
     @Override
     public int hashCode() {
-        return Objects.hash(addressId, provide, city, postCode, street, houseNumber, apartmentNumber);
+        return Objects.hash(addressId, province, city, postCode, street, houseNumber, apartmentNumber);
     }
 
     @Override
     public String toString() {
         return "Address{" +
                 "addressId=" + addressId +
-                ", provide='" + provide + '\'' +
+                ", province='" + province + '\'' +
                 ", city='" + city + '\'' +
                 ", postCode='" + postCode + '\'' +
                 ", street='" + street + '\'' +
