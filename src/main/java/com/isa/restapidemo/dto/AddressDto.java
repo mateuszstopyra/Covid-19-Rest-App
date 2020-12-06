@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.isa.restapidemo.model.Citizen;
 
-import javax.persistence.Column;
-import javax.persistence.OneToMany;
 import java.util.Set;
 
 public class AddressDto {
@@ -26,7 +24,7 @@ public class AddressDto {
     private Integer apartmentNumber;
 
     @JsonIgnore
-    private Set<Citizen> citizens;
+    private Set<Citizen> patients;
 
     public AddressDto(Integer addressId, String province, String city, String postCode, String street, Integer houseNumber, Integer apartmentNumber, Set<Citizen> citizens) {
         this.addressId = addressId;
@@ -36,7 +34,7 @@ public class AddressDto {
         this.street = street;
         this.houseNumber = houseNumber;
         this.apartmentNumber = apartmentNumber;
-        this.citizens = citizens;
+        this.patients = citizens;
     }
 
     @Override
@@ -49,7 +47,7 @@ public class AddressDto {
                 ", street='" + street + '\'' +
                 ", houseNumber=" + houseNumber +
                 ", apartmentNumber=" + apartmentNumber +
-                ", citizens=" + citizens +
+                ", citizens=" + patients +
                 '}';
     }
 
@@ -109,11 +107,11 @@ public class AddressDto {
         this.apartmentNumber = apartmentNumber;
     }
 
-    public Set<Citizen> getCitizens() {
-        return citizens;
+    public Set<Citizen> getPatients() {
+        return patients;
     }
 
-    public void setCitizens(Set<Citizen> citizens) {
-        this.citizens = citizens;
+    public void setPatients(Set<Citizen> patients) {
+        this.patients = patients;
     }
 }

@@ -27,11 +27,9 @@ public class Citizen {
 
     private boolean isDoctor;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     private Citizen doctor;
 
-    @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER)
     private Set<Citizen> patients;
 

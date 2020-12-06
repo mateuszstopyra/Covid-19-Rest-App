@@ -32,7 +32,7 @@ public class Address {
 
     @OneToMany(mappedBy = "address")
     @JsonIgnore
-    private Set<Citizen> citizens;
+    private Set<Citizen> patients;
 
     public Address() {
     }
@@ -93,12 +93,12 @@ public class Address {
         this.apartmentNumber = apartmentNumber;
     }
 
-    public Set<Citizen> getCitizens() {
-        return citizens;
+    public Set<Citizen> getPatients() {
+        return patients;
     }
 
-    public void setCitizens(Set<Citizen> citizens) {
-        this.citizens = citizens;
+    public void setPatients(Set<Citizen> citizens) {
+        this.patients = citizens;
     }
 
     @Override
@@ -130,7 +130,7 @@ public class Address {
                 ", street='" + street + '\'' +
                 ", houseNumber=" + houseNumber +
                 ", apartmentNumber=" + apartmentNumber +
-                ", citizens=" + citizens +
+                ", patients=" + patients +
                 '}';
     }
 }
