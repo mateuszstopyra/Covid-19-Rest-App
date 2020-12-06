@@ -3,6 +3,7 @@ package com.isa.restapidemo.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,6 +19,9 @@ public class Citizen {
 
     @Column(nullable = false)
     private String surname;
+
+    @Column(nullable = true)
+    private Date birthdate;
 
     @Column(nullable = false)
     private Gender gender;
@@ -38,6 +42,14 @@ public class Citizen {
     private Address address;
 
     public Citizen() {
+    }
+
+    public Date getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
     }
 
     public Integer getCitizenId() {
@@ -131,6 +143,7 @@ public class Citizen {
                 "citizenId=" + citizenId +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
+                ", birthdate=" + birthdate +
                 ", gender=" + gender +
                 ", pesel='" + pesel + '\'' +
                 ", isDoctor=" + isDoctor +

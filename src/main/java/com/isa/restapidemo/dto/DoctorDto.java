@@ -1,10 +1,12 @@
 package com.isa.restapidemo.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.isa.restapidemo.model.Address;
 import com.isa.restapidemo.model.Citizen;
 import com.isa.restapidemo.model.Gender;
 
+import java.util.Date;
 import java.util.Set;
 
 public class DoctorDto {
@@ -18,6 +20,9 @@ public class DoctorDto {
 
     private Gender gender;
 
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
+    private Date birthdate;
+
     private String pesel;
 
     private boolean isDoctor;
@@ -26,15 +31,24 @@ public class DoctorDto {
 
     private Address address;
 
-    public DoctorDto(Integer citizenId, String name, String surname, Gender gender, String pesel, boolean isDoctor, Set<Citizen> patients, Address address) {
+    public DoctorDto(Integer citizenId, String name, String surname, Gender gender, Date birthdate, String pesel, boolean isDoctor, Set<Citizen> patients, Address address) {
         this.citizenId = citizenId;
         this.name = name;
         this.surname = surname;
         this.gender = gender;
+        this.birthdate = birthdate;
         this.pesel = pesel;
         this.isDoctor = isDoctor;
         this.patients = patients;
         this.address = address;
+    }
+
+    public Date getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
     }
 
     public Integer getCitizenId() {
@@ -108,6 +122,7 @@ public class DoctorDto {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", gender=" + gender +
+                ", birthdate=" + birthdate +
                 ", pesel='" + pesel + '\'' +
                 ", isDoctor=" + isDoctor +
                 ", patients=" + patients +

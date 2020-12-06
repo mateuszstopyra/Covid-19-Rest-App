@@ -1,5 +1,6 @@
 package com.isa.restapidemo.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.isa.restapidemo.model.Address;
@@ -7,6 +8,7 @@ import com.isa.restapidemo.model.Citizen;
 import com.isa.restapidemo.model.Gender;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
@@ -21,6 +23,9 @@ public class CitizenDto {
 
     private Gender gender;
 
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
+    private Date birthdate;
+
     private String pesel;
 
     private boolean isDoctor;
@@ -31,11 +36,12 @@ public class CitizenDto {
 
     private Address address;
 
-    public CitizenDto(Integer citizenId, String name, String surname, Gender gender, String pesel, boolean isDoctor, Citizen doctor, Set<Citizen> patients, Address address) {
+    public CitizenDto(Integer citizenId, String name, String surname, Gender gender, Date birthdate, String pesel, boolean isDoctor, Citizen doctor, Set<Citizen> patients, Address address) {
         this.citizenId = citizenId;
         this.name = name;
         this.surname = surname;
         this.gender = gender;
+        this.birthdate = birthdate;
         this.pesel = pesel;
         this.isDoctor = isDoctor;
         this.doctor = doctor;
@@ -128,6 +134,14 @@ public class CitizenDto {
         return Objects.hash(pesel);
     }
 
+    public Date getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
+    }
+
     @Override
     public String toString() {
         return "CitizenDto{" +
@@ -135,6 +149,7 @@ public class CitizenDto {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", gender=" + gender +
+                ", birthdate=" + birthdate +
                 ", pesel='" + pesel + '\'' +
                 ", isDoctor=" + isDoctor +
                 ", doctor=" + doctor +
