@@ -36,17 +36,7 @@ public class CitizenDto {
 
     private Address address;
 
-    public CitizenDto(Integer citizenId, String name, String surname, Gender gender, Date birthdate, String pesel, boolean isDoctor, Citizen doctor, Set<Citizen> patients, Address address) {
-        this.citizenId = citizenId;
-        this.name = name;
-        this.surname = surname;
-        this.gender = gender;
-        this.birthdate = birthdate;
-        this.pesel = pesel;
-        this.isDoctor = isDoctor;
-        this.doctor = doctor;
-        this.patients = patients;
-        this.address = address;
+    public CitizenDto(){
     }
 
     public Integer getCitizenId() {

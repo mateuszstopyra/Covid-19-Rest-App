@@ -31,16 +31,7 @@ public class DoctorDto {
 
     private Address address;
 
-    public DoctorDto(Integer citizenId, String name, String surname, Gender gender, Date birthdate, String pesel, boolean isDoctor, Set<Citizen> patients, Address address) {
-        this.citizenId = citizenId;
-        this.name = name;
-        this.surname = surname;
-        this.gender = gender;
-        this.birthdate = birthdate;
-        this.pesel = pesel;
-        this.isDoctor = isDoctor;
-        this.patients = patients;
-        this.address = address;
+    public DoctorDto(){
     }
 
     public Date getBirthdate() {

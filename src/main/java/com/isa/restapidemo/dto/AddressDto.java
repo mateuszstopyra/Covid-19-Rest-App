@@ -26,15 +26,7 @@ public class AddressDto {
     @JsonIgnore
     private Set<Citizen> patients;
 
-    public AddressDto(Integer addressId, String province, String city, String postCode, String street, Integer houseNumber, Integer apartmentNumber, Set<Citizen> citizens) {
-        this.addressId = addressId;
-        this.province = province;
-        this.city = city;
-        this.postCode = postCode;
-        this.street = street;
-        this.houseNumber = houseNumber;
-        this.apartmentNumber = apartmentNumber;
-        this.patients = citizens;
+    public AddressDto(){
     }
 
     @Override
