@@ -19,6 +19,9 @@ public class Citizen {
     @Column(nullable = false)
     private String surname;
 
+    @Column(nullable = false)
+    private Gender gender;
+
     @Column(unique = true, nullable = false)
     private String pesel;
 
@@ -116,12 +119,21 @@ public class Citizen {
         return Objects.hash(pesel);
     }
 
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
     @Override
     public String toString() {
         return "Citizen{" +
-                "id=" + citizenId +
+                "citizenId=" + citizenId +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
+                ", gender=" + gender +
                 ", pesel='" + pesel + '\'' +
                 ", isDoctor=" + isDoctor +
                 ", doctor=" + doctor +
