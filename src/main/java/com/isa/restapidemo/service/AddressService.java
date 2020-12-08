@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class AddressService {
 
     @Inject
-    AddressDaoBean addressDaoBean;
+    private AddressDaoBean addressDaoBean;
 
     private AddressDto provideAddressDto(Address address){
         AddressDto addressDto = new AddressDto();

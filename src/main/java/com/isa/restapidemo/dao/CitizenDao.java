@@ -16,7 +16,7 @@ public interface CitizenDao extends Dao<Citizen> {
 
     Optional<Citizen> getByDoctorSurname(String surname);
 
-    Optional<Citizen> getById(Integer id);
+    Citizen getById(Integer id);
 
     List<Citizen> getPatients();
 

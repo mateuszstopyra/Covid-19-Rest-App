@@ -90,8 +90,8 @@ public class CitizenDaoBean implements CitizenDao {
     }
 
     @Override
-    public Optional<Citizen> getById(Integer id) {
-        return Optional.ofNullable(entityManager.find(Citizen.class,id));
+    public Citizen getById(Integer id) {
+        return entityManager.find(Citizen.class,id);
     }
 
     //TODO
