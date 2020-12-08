@@ -8,6 +8,8 @@ import com.isa.restapidemo.model.Address;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequestScoped
 public class AddressService {
@@ -63,7 +65,35 @@ public class AddressService {
         return provideAddressDto(address);
     }
 
-    
+    @Transactional
+    public boolean removeAddress(Integer addressId){
+        Address address = addressDaoBean.findByAddressId(addressId);
+        if(address == null){
+            return false;
+        }else{
+            addressDaoBean.remove(address);
+            return true;
+        }
+    }
+
+    @Transactional
+    public AddressDto getAddressById(Integer id){
+        Address address = addressDaoBean.findByAddressId(id);
+        return provideAddressDto(address);
+    }
+
+    @Transactional
+    public List<AddressDto> getAll(){
+        List<Address> addresses = addressDaoBean.findAll();
+        return addresses.stream()
+                .map(this::provideAddressDto)
+                .collect(Collectors.toList());
+    }
+
+
+
+
+
 
 
 
