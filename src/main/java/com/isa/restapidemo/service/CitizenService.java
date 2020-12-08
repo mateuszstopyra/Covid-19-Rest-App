@@ -1,12 +1,15 @@
 package com.isa.restapidemo.service;
 
+import com.isa.restapidemo.dao.CitizenDao;
 import com.isa.restapidemo.dao.CitizenDaoBean;
 import com.isa.restapidemo.dto.CitizenDto;
 import com.isa.restapidemo.model.Citizen;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequestScoped
 public class CitizenService {
@@ -80,6 +83,13 @@ public class CitizenService {
     public CitizenDto getCitizenById(Integer citizenId){
         Citizen citizen = citizenDaoBean.getById(citizenId);
         return provideCitizenDto(citizen);
+    }
+
+    public List<CitizenDto> getAll(){
+        List<Citizen> citizens = citizenDaoBean.findAll();
+        return citizens.stream()
+                .map(this::provideCitizenDto)
+                .collect(Collectors.toList());
     }
 
 
