@@ -7,6 +7,7 @@ import com.isa.restapidemo.model.Citizen;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -47,12 +48,14 @@ public class CitizenService {
         return citizenDto;
     }
 
+    @Transactional
     public CitizenDto saveCitizen(CitizenDto citizenDto){
         Citizen citizen = provideCitizen(citizenDto);
         citizenDaoBean.save(citizen);
         return provideCitizenDto(citizen);
     }
 
+    @Transactional
     public boolean removeCitizen(Integer citizenId){
         Citizen citizen = citizenDaoBean.getById(citizenId);
         if (citizen == null){
@@ -63,6 +66,7 @@ public class CitizenService {
         }
     }
 
+    @Transactional
     public CitizenDto updateCitizen(Integer citizenId, CitizenDto citizenDto){
         Citizen citizen = citizenDaoBean.getById(citizenId);
         Citizen updatedCitizen = provideCitizen(citizenDto);
@@ -80,11 +84,13 @@ public class CitizenService {
         return provideCitizenDto(citizen);
     }
 
+    @Transactional
     public CitizenDto getCitizenById(Integer citizenId){
         Citizen citizen = citizenDaoBean.getById(citizenId);
         return provideCitizenDto(citizen);
     }
 
+    @Transactional
     public List<CitizenDto> getAll(){
         List<Citizen> citizens = citizenDaoBean.findAll();
         return citizens.stream()

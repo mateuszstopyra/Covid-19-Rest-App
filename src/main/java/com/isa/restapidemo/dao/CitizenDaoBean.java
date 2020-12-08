@@ -14,8 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-@Transactional
-@Stateless
+@RequestScoped
 public class CitizenDaoBean implements CitizenDao {
 
     private static final Logger LOG = Logger.getLogger(CitizenDaoBean.class.getName());

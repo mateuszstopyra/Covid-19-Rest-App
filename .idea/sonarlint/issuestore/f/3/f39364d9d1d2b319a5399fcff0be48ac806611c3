@@ -1,0 +1,15 @@
+
+X
+java:S3655H"6Call "citizen.isPresent()" before accessing the value.(¦žž¹ÿÿÿÿÿ8ÃÄø¡ä.
+U
+java:S1128":Remove this unused import 'javax.enterprise.inject.Typed'.(©©ÞÏúÿÿÿÿ
+H
+java:S1135`"2Complete the task associated to this TODO comment.(…ïœ†
+X
+java:S3655S"6Call "citizen.isPresent()" before accessing the value.(¦žž¹ÿÿÿÿÿ8ÃÄø¡ä.
+H
+java:S1135h"2Complete the task associated to this TODO comment.(…ïœ†
+M
+java:S1128"0Remove this unused import 'javax.ejb.Stateless'.(Žžä¬8¾Áû¡ä.
+^
+java:S1128"<Remove this unused import 'javax.transaction.Transactional'.(ûÒçÑúÿÿÿÿ8¾Áû¡ä.

@@ -29,6 +29,7 @@ public class Citizen {
     @Column(unique = true, nullable = false)
     private String pesel;
 
+    @Column(nullable = false)
     private boolean isDoctor;
 
     @ManyToOne(fetch = FetchType.EAGER)

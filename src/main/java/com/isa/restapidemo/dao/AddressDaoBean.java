@@ -3,13 +3,13 @@ package com.isa.restapidemo.dao;
 import com.isa.restapidemo.model.Address;
 
 import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Transactional
-@Stateless
+@RequestScoped
 public class AddressDaoBean implements AddressDao {
 
     @PersistenceContext
