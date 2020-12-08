@@ -34,4 +34,9 @@ public class AddressDaoBean implements AddressDao {
     public List<Address> findAll() {
         return entityManager.createQuery("From Address").getResultList();
     }
+
+    @Override
+    public Address findByAddressId(Integer id) {
+        return entityManager.find(Address.class, id);
+    }
 }

@@ -7,6 +7,7 @@ import com.isa.restapidemo.model.Address;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 @RequestScoped
 public class AddressService {
@@ -39,6 +40,32 @@ public class AddressService {
         address.setStreet(addressDto.getStreet());
         return address;
     }
+
+    @Transactional
+    public AddressDto saveAddress(AddressDto addressDto){
+        Address address = provideAddress(addressDto);
+        addressDaoBean.save(address);
+        return provideAddressDto(address);
+    }
+
+    @Transactional
+    public AddressDto updateAddress(Integer addressId, AddressDto addressDto){
+        Address address = addressDaoBean.findByAddressId(addressId);
+        Address updatedAddress = provideAddress(addressDto);
+        address.setApartmentNumber(updatedAddress.getApartmentNumber());
+        address.setCity(updatedAddress.getCity());
+        address.setHouseNumber(updatedAddress.getHouseNumber());
+        address.setPatients(updatedAddress.getPatients());
+        address.setProvince(updatedAddress.getProvince());
+        address.setPostCode(updatedAddress.getPostCode());
+        address.setStreet(updatedAddress.getStreet());
+        addressDaoBean.update(address);
+        return provideAddressDto(address);
+    }
+
+    
+
+
 
 
 
