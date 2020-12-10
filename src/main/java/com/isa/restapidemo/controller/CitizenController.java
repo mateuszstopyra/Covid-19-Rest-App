@@ -17,7 +17,6 @@ public class CitizenController {
     @Inject
     CitizenService citizenService;
 
-    //TODO
     @GET
     public List<CitizenDto> findAllCitizens(){
         return citizenService.getAll();
@@ -37,7 +36,7 @@ public class CitizenController {
     @PUT
     @Path("/{id}")
     public CitizenDto updateCitizen(@PathParam("id") Integer citizenId, CitizenDto citizenDto){
-        return citizenService.saveCitizen(citizenDto);
+        return citizenService.updateCitizen(citizenId,citizenDto);
     }
 
     @DELETE

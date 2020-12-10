@@ -2,14 +2,11 @@ package com.isa.restapidemo.dao;
 
 import com.isa.restapidemo.model.Citizen;
 
-import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Typed;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -55,21 +52,16 @@ public class CitizenDaoBean implements CitizenDao {
     }
 
     @Override
-    public Optional<Citizen> getBySurname(String surname) {
-        try {
+    public List<Citizen> getBySurname(String surname) {
             TypedQuery<Citizen> query = entityManager.createQuery("select p from Citizen p where p.surname= :surname", Citizen.class);
             query.setParameter("surname", surname);
-            return Optional.ofNullable(query.getSingleResult());
-        }catch(NoResultException e){
-            LOG.info(e.getMessage());
-            return Optional.empty();
-        }
+            return query.getResultList();
     }
 
     @Override
     public Optional<Citizen> getByDoctorPesel(String pesel) {
         Optional<Citizen> citizen = getByPesel(pesel);
-        if(citizen.get().isDoctor()){
+        if(citizen.get().getIsDoctor()){
             return citizen;
         }else{
             LOG.info("No doctor with that pesel");
@@ -77,16 +69,6 @@ public class CitizenDaoBean implements CitizenDao {
         }
     }
 
-    @Override
-    public Optional<Citizen> getByDoctorSurname(String surname) {
-        Optional<Citizen> citizen = getBySurname(surname);
-        if(citizen.get().isDoctor()){
-            return citizen;
-        }else {
-            LOG.info("No doctor with that surname");
-            return Optional.empty();
-        }
-    }
 
     @Override
     public Citizen getById(Integer id) {

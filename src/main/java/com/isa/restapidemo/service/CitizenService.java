@@ -24,7 +24,7 @@ public class CitizenService {
         citizen.setBirthdate(citizenDto.getBirthdate());
         citizen.setCitizenId(citizenDto.getCitizenId());
         citizen.setDoctor(citizenDto.getDoctor());
-        citizen.setDoctor(citizenDto.isDoctor());
+        citizen.setIsDoctor(citizenDto.getIsDoctor());
         citizen.setGender(citizenDto.getGender());
         citizen.setName(citizenDto.getName());
         citizen.setSurname(citizenDto.getSurname());
@@ -39,7 +39,7 @@ public class CitizenService {
         citizenDto.setBirthdate(citizen.getBirthdate());
         citizenDto.setCitizenId(citizen.getCitizenId());
         citizenDto.setDoctor(citizen.getDoctor());
-        citizenDto.setDoctor(citizen.isDoctor());
+        citizenDto.setIsDoctor(citizen.getIsDoctor());
         citizenDto.setGender(citizen.getGender());
         citizenDto.setName(citizen.getName());
         citizenDto.setSurname(citizen.getSurname());
@@ -74,7 +74,7 @@ public class CitizenService {
         citizen.setBirthdate(updatedCitizen.getBirthdate());
         citizen.setCitizenId(updatedCitizen.getCitizenId());
         citizen.setDoctor(updatedCitizen.getDoctor());
-        citizen.setDoctor(updatedCitizen.isDoctor());
+        citizen.setIsDoctor(updatedCitizen.getIsDoctor());
         citizen.setGender(updatedCitizen.getGender());
         citizen.setName(updatedCitizen.getName());
         citizen.setSurname(updatedCitizen.getSurname());
@@ -97,6 +97,25 @@ public class CitizenService {
                 .map(this::provideCitizenDto)
                 .collect(Collectors.toList());
     }
+
+    @Transactional
+    public List<CitizenDto> getCitizensBySurname(String surname){
+        List<Citizen> citizens = citizenDaoBean.getBySurname(surname);
+    }
+
+
+
+//    getCitizenBySurname;
+//
+//    getCitizenByPesel;
+//
+//    getCitizenByProvince;
+//
+//    getCitizenByCity;
+//
+//    getCitizenByPostCode;
+
+
 
 
 

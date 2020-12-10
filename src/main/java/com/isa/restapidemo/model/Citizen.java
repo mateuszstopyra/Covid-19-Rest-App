@@ -30,7 +30,7 @@ public class Citizen {
     private String pesel;
 
     @Column(nullable = false)
-    private boolean isDoctor;
+    private Boolean isDoctor;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Citizen doctor;
@@ -85,12 +85,12 @@ public class Citizen {
         this.pesel = pesel;
     }
 
-    public boolean isDoctor() {
+    public Boolean getIsDoctor() {
         return isDoctor;
     }
 
-    public void setDoctor(boolean doctor) {
-        isDoctor = doctor;
+    public void setIsDoctor(Boolean doctor) {
+        this.isDoctor = doctor;
     }
 
     public Citizen getDoctor() {
