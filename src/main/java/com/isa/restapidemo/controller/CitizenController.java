@@ -19,8 +19,18 @@ public class CitizenController {
     CitizenService citizenService;
 
     @GET
-    public List<CitizenDto> findAllCitizens(){
-        return citizenService.getAll();
+    public List<CitizenDto> findAllCitizens(@QueryParam("city") String city, @QueryParam("surname")String surname, @QueryParam("province")String province,@QueryParam("postcode")String postCode){
+        if(city!=null){
+            return citizenService.getCitizensByCity(city);
+        }else if(surname!=null){
+            return citizenService.getCitizensBySurname(surname);
+        }else if(province!=null){
+            return citizenService.getCitizensByProvince(province);
+        }else if(postCode!=null){
+            return citizenService.getCitizensByPostCode(postCode);
+        }else{
+            return citizenService.getAll();
+        }
     }
 
     @GET
@@ -51,29 +61,11 @@ public class CitizenController {
     }
 
     @GET
-    public List<CitizenDto> findCitizensBySurname(@QueryParam("surname") String surname){
-        return citizenService.getCitizensBySurname(surname);
-    }
-
-    @GET
-    public CitizenDto findCitizenByPesel(@QueryParam("pesel") String pesel){
+    @Path("/{pesel}")
+    public CitizenDto findCitizensBySurname(@PathParam("pesel") String pesel){
         return citizenService.getCitizenByPesel(pesel);
     }
 
-    @GET
-    public List<CitizenDto> findCitizensByProvince(@QueryParam("province") String province){
-        return citizenService.getCitizensByProvince(province);
-    }
-
-    @GET
-    public List<CitizenDto> findCitizensByCity(@QueryParam("city") String city){
-        return citizenService.getCitizensByCity(city);
-    }
-
-    @GET
-    public List<CitizenDto> findCitizensByPostCode(@QueryParam("postcode")String postCode){
-        return citizenService.getCitizensByPostCode(postCode);
-    }
 
 
 
