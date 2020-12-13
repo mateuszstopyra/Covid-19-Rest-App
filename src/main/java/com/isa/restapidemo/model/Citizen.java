@@ -38,7 +38,7 @@ public class Citizen {
     @OneToMany(fetch = FetchType.EAGER)
     private Set<Citizen> patients;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(referencedColumnName = "addressId")
     private Address address;
 

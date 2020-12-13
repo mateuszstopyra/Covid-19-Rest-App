@@ -18,7 +18,7 @@ public class CitizenService {
     @Inject
     private CitizenDaoBean citizenDaoBean;
 
-    private Citizen provideCitizen(CitizenDto citizenDto){
+    private Citizen provideCitizen(CitizenDto citizenDto) {
         Citizen citizen = new Citizen();
         citizen.setAddress(citizenDto.getAddress());
         citizen.setBirthdate(citizenDto.getBirthdate());
@@ -33,7 +33,7 @@ public class CitizenService {
         return citizen;
     }
 
-    private CitizenDto provideCitizenDto(Citizen citizen){
+    private CitizenDto provideCitizenDto(Citizen citizen) {
         CitizenDto citizenDto = new CitizenDto();
         citizenDto.setAddress(citizen.getAddress());
         citizenDto.setBirthdate(citizen.getBirthdate());
@@ -49,25 +49,25 @@ public class CitizenService {
     }
 
     @Transactional
-    public CitizenDto saveCitizen(CitizenDto citizenDto){
+    public CitizenDto saveCitizen(CitizenDto citizenDto) {
         Citizen citizen = provideCitizen(citizenDto);
         citizenDaoBean.save(citizen);
         return provideCitizenDto(citizen);
     }
 
     @Transactional
-    public boolean removeCitizen(Integer citizenId){
+    public boolean removeCitizen(Integer citizenId) {
         Citizen citizen = citizenDaoBean.getById(citizenId);
-        if (citizen == null){
+        if (citizen == null) {
             return false;
-        }else{
+        } else {
             citizenDaoBean.remove(citizen);
             return true;
         }
     }
 
     @Transactional
-    public CitizenDto updateCitizen(Integer citizenId, CitizenDto citizenDto){
+    public CitizenDto updateCitizen(Integer citizenId, CitizenDto citizenDto) {
         Citizen citizen = citizenDaoBean.getById(citizenId);
         Citizen updatedCitizen = provideCitizen(citizenDto);
         citizen.setAddress(updatedCitizen.getAddress());
@@ -85,13 +85,13 @@ public class CitizenService {
     }
 
     @Transactional
-    public CitizenDto getCitizenById(Integer citizenId){
+    public CitizenDto getCitizenById(Integer citizenId) {
         Citizen citizen = citizenDaoBean.getById(citizenId);
         return provideCitizenDto(citizen);
     }
 
     @Transactional
-    public List<CitizenDto> getAll(){
+    public List<CitizenDto> getAll() {
         List<Citizen> citizens = citizenDaoBean.findAll();
         return citizens.stream()
                 .map(this::provideCitizenDto)
@@ -99,24 +99,40 @@ public class CitizenService {
     }
 
     @Transactional
-    public List<CitizenDto> getCitizensBySurname(String surname){
+    public List<CitizenDto> getCitizensBySurname(String surname) {
         List<Citizen> citizens = citizenDaoBean.getBySurname(surname);
+        return citizens.stream()
+                .map(this::provideCitizenDto)
+                .collect(Collectors.toList());
     }
 
+    @Transactional
+    public CitizenDto getCitizenByPesel(String pesel) {
+        Citizen citizen = citizenDaoBean.getByPesel(pesel).get();
+        return provideCitizenDto(citizen);
+    }
 
+    @Transactional
+    public List<CitizenDto> getCitizensByProvince(String province) {
+        List<Citizen> citizenList = citizenDaoBean.getByProvince(province);
+        return citizenList.stream()
+                .map(this::provideCitizenDto)
+                .collect(Collectors.toList());
+    }
 
-//    getCitizenBySurname;
-//
-//    getCitizenByPesel;
-//
-//    getCitizenByProvince;
-//
-//    getCitizenByCity;
-//
-//    getCitizenByPostCode;
+    @Transactional
+    public List<CitizenDto> getCitizensByCity(String city) {
+        List<Citizen> citizenList = citizenDaoBean.getByCity(city);
+        return citizenList.stream()
+                .map(this::provideCitizenDto)
+                .collect(Collectors.toList());
+    }
 
-
-
-
-
+    @Transactional
+    public List<CitizenDto> getCitizensByPostCode(String postCode) {
+        List<Citizen> citizenList = citizenDaoBean.getByPostCode(postCode);
+        return citizenList.stream()
+                .map(this::provideCitizenDto)
+                .collect(Collectors.toList());
+    }
 }

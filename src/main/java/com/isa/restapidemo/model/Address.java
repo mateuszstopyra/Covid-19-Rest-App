@@ -30,7 +30,7 @@ public class Address {
 
     private Integer apartmentNumber;
 
-    @OneToMany(mappedBy = "address")
+    @OneToMany(mappedBy = "address",cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Citizen> patients;
 

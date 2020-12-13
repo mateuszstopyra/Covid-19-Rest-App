@@ -102,7 +102,8 @@ public class CitizenDaoBean implements CitizenDao {
     public List<Citizen> getByCity(String city) {
         TypedQuery<Citizen> query = entityManager.createQuery("select p from Citizen p where p.address.city= :city",Citizen.class);
         query.setParameter("city",city);
-        return query.getResultList();       }
+        return query.getResultList();
+    }
 
     @Override
     public List<Citizen> getByPostCode(String postCode) {
