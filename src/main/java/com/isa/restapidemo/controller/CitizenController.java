@@ -1,6 +1,7 @@
 package com.isa.restapidemo.controller;
 
 import com.isa.restapidemo.dto.CitizenDto;
+import com.isa.restapidemo.model.Citizen;
 import com.isa.restapidemo.service.CitizenService;
 
 import javax.inject.Inject;
@@ -47,6 +48,31 @@ public class CitizenController {
         }else{
             return Response.status(404).build();
         }
+    }
+
+    @GET
+    public List<CitizenDto> findCitizensBySurname(@QueryParam("surname") String surname){
+        return citizenService.getCitizensBySurname(surname);
+    }
+
+    @GET
+    public CitizenDto findCitizenByPesel(@QueryParam("pesel") String pesel){
+        return citizenService.getCitizenByPesel(pesel);
+    }
+
+    @GET
+    public List<CitizenDto> findCitizensByProvince(@QueryParam("province") String province){
+        return citizenService.getCitizensByProvince(province);
+    }
+
+    @GET
+    public List<CitizenDto> findCitizensByCity(@QueryParam("city") String city){
+        return citizenService.getCitizensByCity(city);
+    }
+
+    @GET
+    public List<CitizenDto> findCitizensByPostCode(@QueryParam("postcode")String postCode){
+        return citizenService.getCitizensByPostCode(postCode);
     }
 
 
