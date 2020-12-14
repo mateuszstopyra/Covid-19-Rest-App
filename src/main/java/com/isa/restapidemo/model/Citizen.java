@@ -32,9 +32,11 @@ public class Citizen {
     @Column(nullable = false)
     private Boolean isDoctor;
 
+    @Column(nullable = true)
     @ManyToOne(fetch = FetchType.EAGER)
     private Citizen doctor;
 
+    @Column(nullable = true)
     @OneToMany(fetch = FetchType.EAGER)
     private Set<Citizen> patients;
 
