@@ -9,6 +9,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Set;
 
 @RequestScoped
 public class PatientService {
@@ -48,6 +49,7 @@ public class PatientService {
     public PatientDto addPatient(PatientDto patientDto){
         Citizen patient = providePatient(patientDto);
         citizenDaoBean.save(patient);
+        updatePatientsForDoctor(patient.getDoctor().getCitizenId(), patient.getPesel());
         return provideCitizenDto(patient);
     }
 
@@ -70,6 +72,15 @@ public class PatientService {
         patient.setPesel(updatePatient.getPesel());
         citizenDaoBean.update(patient);
         return provideCitizenDto(patient);
+    }
+
+    public void updatePatientsForDoctor(Integer doctorId, String patientPesel){
+        Citizen doctor = citizenDaoBean.getById(doctorId);
+        Set<Citizen> patients = doctor.getPatients();
+        patients.add(citizenDaoBean.getByPesel(patientPesel).get());
+        doctor.setPatients(patients);
+        citizenDaoBean.update(doctor);
+
     }
 
     @Transactional
