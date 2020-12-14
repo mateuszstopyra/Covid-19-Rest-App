@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RequestScoped
 public class PatientService {
@@ -31,7 +32,7 @@ public class PatientService {
         return patient;
     }
 
-    private PatientDto provideCitizenDto(Citizen patient) {
+    private PatientDto providePatientDto(Citizen patient) {
         PatientDto patientDto = new PatientDto();
         patientDto.setAddress(patient.getAddress());
         patientDto.setBirthdate(patient.getBirthdate());
@@ -50,13 +51,13 @@ public class PatientService {
         Citizen patient = providePatient(patientDto);
         citizenDaoBean.save(patient);
         updatePatientsForDoctor(patient.getDoctor().getCitizenId(), patient.getPesel());
-        return provideCitizenDto(patient);
+        return providePatientDto(patient);
     }
 
     @Transactional
     public PatientDto getPatientById(Integer patientId){
         Citizen patient = citizenDaoBean.getById(patientId);
-        return provideCitizenDto(patient);
+        return providePatientDto(patient);
     }
 
     @Transactional
@@ -71,7 +72,7 @@ public class PatientService {
         patient.setSurname(updatePatient.getSurname());
         patient.setPesel(updatePatient.getPesel());
         citizenDaoBean.update(patient);
-        return provideCitizenDto(patient);
+        return providePatientDto(patient);
     }
 
     public void updatePatientsForDoctor(Integer doctorId, String patientPesel){
@@ -95,32 +96,50 @@ public class PatientService {
     }
 
     @Transactional
-    public List<PatientDto> getAllPatients;
+    public List<PatientDto> getAllPatients(){
+        List<Citizen> patients = citizenDaoBean.getPatients();
+        return patients.stream()
+                .map(this::providePatientDto)
+                .collect(Collectors.toList());
+    }
 
     @Transactional
-    public PatientDto getPatientByPesel;
+    public PatientDto getPatientByPesel(String patientPesel){
+        Citizen patient = citizenDaoBean.getByPesel(patientPesel).get();
+        return providePatientDto(patient);
+    }
 
     @Transactional
-    public List<PatientDto> getPatientBySurname;
+    public List<PatientDto> getPatientBySurname(String patientSurname){
+        List<Citizen> patients = citizenDaoBean.getBySurname(patientSurname);
+        return patients.stream()
+                .map(this::providePatientDto)
+                .collect(Collectors.toList());
+    }
 
     @Transactional
-    public List<PatientDto> getPatientByCity;
+    public List<PatientDto> getPatientByCity(String patientCity){
+        List<Citizen> patients = citizenDaoBean.getByCity(patientCity);
+        return patients.stream()
+                .map(this::providePatientDto)
+                .collect(Collectors.toList());
+    }
 
     @Transactional
-    public List<PatientDto> getPatientByProvince;
+    public List<PatientDto> getPatientByProvince(String patientProvince){
+        List<Citizen> patients = citizenDaoBean.getByProvince(patientProvince);
+        return patients.stream()
+                .map(this::providePatientDto)
+                .collect(Collectors.toList());
+    }
 
     @Transactional
-    public List<PatientDto> getPatientByPostCode;
+    public List<PatientDto> getPatientByPostCode(String patientPostCode){
+        List<Citizen> patients = citizenDaoBean.getBySurname(patientPostCode);
+        return patients.stream()
+                .map(this::providePatientDto)
+                .collect(Collectors.toList());
+    }
 
-
-
-
-
-
-
-
-
-
-
-
+    
 }
