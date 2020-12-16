@@ -64,18 +64,19 @@ public class CitizenDaoBean implements CitizenDao {
         if(citizen.get().getIsDoctor()){
             return citizen;
         }else{
-            LOG.info("No doctor with that pesel");
+            LOG.info("No doctor with this pesel");
             return Optional.empty();
         }
     }
 
     @Override
-    public Citizen getDoctorById(Integer id) {
-        Citizen doctor = getById(id);
-        if(doctor.getIsDoctor()){
+    public Optional<Citizen> getDoctorById(Integer id) {
+        Optional<Citizen> doctor = Optional.ofNullable(getById(id));
+        if(doctor.get().getIsDoctor()){
             return doctor;
         }else{
-            return new Citizen();
+            LOG.info("No doctor with this id");
+            return Optional.empty();
         }
 
     }

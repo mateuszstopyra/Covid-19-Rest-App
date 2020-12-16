@@ -54,13 +54,13 @@ public class DoctorService {
 
     @Transactional
     public DoctorDto getDoctorById(Integer doctorId){
-        Citizen doctor = citizenDaoBean.getDoctorById(doctorId);
+        Citizen doctor = citizenDaoBean.getDoctorById(doctorId).get();
         return provideDoctorDto(doctor);
     }
 
     @Transactional
     public DoctorDto updateDoctor(Integer doctorId, DoctorDto doctorDto){
-        Citizen doctor = citizenDaoBean.getDoctorById(doctorId);
+        Citizen doctor = citizenDaoBean.getDoctorById(doctorId).get();
         Citizen updateDoctor = provideDoctor(doctorDto);
         doctor.setAddress(updateDoctor.getAddress());
         doctor.setBirthdate(updateDoctor.getBirthdate());
@@ -72,6 +72,17 @@ public class DoctorService {
         doctor.setPesel(updateDoctor.getPesel());
         citizenDaoBean.update(doctor);
         return provideDoctorDto(doctor);
+    }
+
+    @Transactional
+    public boolean removeDoctor(Integer doctorId) {
+        Citizen doctor = citizenDaoBean.getDoctorById(doctorId).get();
+        if (doctor == null) {
+            return false;
+        } else {
+            citizenDaoBean.remove(patient);
+            return true;
+        }
     }
 
 
