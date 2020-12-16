@@ -25,6 +25,8 @@ public interface CitizenDao extends Dao<Citizen> {
 
     List<Citizen> getByPostCode(String postcode);
 
+    Citizen getDoctorById(Integer id);
+
 
 
 }

@@ -69,6 +69,16 @@ public class CitizenDaoBean implements CitizenDao {
         }
     }
 
+    @Override
+    public Citizen getDoctorById(Integer id) {
+        Citizen doctor = getById(id);
+        if(doctor.getIsDoctor()){
+            return doctor;
+        }else{
+            return new Citizen();
+        }
+
+    }
 
     @Override
     public Citizen getById(Integer id) {
