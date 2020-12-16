@@ -10,6 +10,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.print.Doc;
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @RequestScoped
 public class DoctorService {
@@ -53,9 +54,11 @@ public class DoctorService {
     }
 
     @Transactional
-    public DoctorDto getDoctorById(Integer doctorId){
-        Citizen doctor = citizenDaoBean.getDoctorById(doctorId).get();
-        return provideDoctorDto(doctor);
+    public DoctorDto getDoctorById(Integer doctorId) {
+        Optional<Citizen> doctor = citizenDaoBean.getDoctorById(doctorId);
+        if (doctor.isPresent()) {
+            return provideDoctorDto(doctor.get());
+        }
     }
 
     @Transactional
@@ -76,14 +79,24 @@ public class DoctorService {
 
     @Transactional
     public boolean removeDoctor(Integer doctorId) {
-        Citizen doctor = citizenDaoBean.getDoctorById(doctorId).get();
-        if (doctor == null) {
+        Optional<Citizen> doctor = citizenDaoBean.getDoctorById(doctorId);
+        if (doctor.isEmpty()) {
             return false;
         } else {
-            citizenDaoBean.remove(patient);
+            citizenDaoBean.remove(doctor.get());
             return true;
         }
     }
+
+    @Transactional
+    public DoctorDto getDoctorByPesel(String doctorPesel){
+        Optional<Citizen> doctor = citizenDaoBean.getByDoctorPesel(doctorPesel);
+        if(doctor.isPresent()){
+            return provideDoctorDto(doctor.get());
+        }
+    }
+
+
 
 
 
