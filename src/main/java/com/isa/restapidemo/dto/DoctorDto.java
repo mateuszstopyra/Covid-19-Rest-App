@@ -25,7 +25,7 @@ public class DoctorDto {
 
     private String pesel;
 
-    private boolean isDoctor;
+    private Boolean isDoctor;
 
     private Set<Citizen> patients;
 
@@ -82,11 +82,11 @@ public class DoctorDto {
         this.pesel = pesel;
     }
 
-    public boolean isDoctor() {
+    public Boolean getIsDoctor() {
         return isDoctor;
     }
 
-    public void setDoctor(boolean doctor) {
+    public void setIsDoctor(Boolean doctor) {
         isDoctor = doctor;
     }
 

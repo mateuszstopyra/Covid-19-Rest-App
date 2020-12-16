@@ -76,7 +76,7 @@ public class PatientService {
     }
 
     public void updatePatientsForDoctor(Integer doctorId, String patientPesel){
-        Citizen doctor = citizenDaoBean.getById(doctorId);
+        Citizen doctor = citizenDaoBean.getDoctorById(doctorId);
         Set<Citizen> patients = doctor.getPatients();
         patients.add(citizenDaoBean.getByPesel(patientPesel).get());
         doctor.setPatients(patients);
