@@ -1,1 +1,3 @@
-# jjdzr1-materialy-restapi
+# covid-19-rest-app
+
+Currently suspended.
